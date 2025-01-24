@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "36674303374",
+    "project_id": "carrier-hive",
+    "storage_bucket": "carrier-hive.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36674303374:android:5157f4b4a0b8a82bbe60df",
+        "android_client_info": {
+          "package_name": "com.example.carrier_hive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD37Mh9bxw9oA0VUsWeImLeRCPd-21w7no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
