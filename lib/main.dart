@@ -1,6 +1,7 @@
 import 'package:carrier_hive/screens/admin/homepage.dart';
 import 'package:carrier_hive/screens/applicationStatus.dart';
 import 'package:carrier_hive/screens/recruiter/homepage.dart';
+import 'package:carrier_hive/screens/user/applyJob.dart';
 import 'package:carrier_hive/screens/user/homepage.dart';
 import 'package:carrier_hive/widgets/auth/login.dart';
 import 'package:carrier_hive/widgets/wrapper/wrapper.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/admin/dashboard': (context) => const adminDashboard(),
         '/user/dashboard': (context) => const StudentDashboard(),
         '/recruiter/dashboard': (context) => const RecruiterDashboard(),
+        '/user/dashboard/Jobs': (context) => const StudentJobsPage(),
         '/user/dashboard/applications': (context) =>
             const ApplicationStatusPage(),
       },

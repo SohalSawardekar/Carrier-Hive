@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class JobApplications {
   final String id;
   final String jobId;
@@ -5,7 +7,7 @@ class JobApplications {
   final String applicantName;
   final String resumeUrl;
   final String coverLetter;
-  final DateTime applicationDate;
+  final Timestamp applicationDate;
   final String status;
 
   JobApplications({
@@ -27,7 +29,7 @@ class JobApplications {
       'applicantName': applicantName,
       'resumeUrl': resumeUrl,
       'coverLetter': coverLetter,
-      'applicationDate': applicationDate.toIso8601String(),
+      'applicationDate': applicationDate,
       'status': status,
     };
   }
@@ -40,7 +42,7 @@ class JobApplications {
       applicantName: map['applicantName'] ?? '',
       resumeUrl: map['resumeUrl'] ?? '',
       coverLetter: map['coverLetter'] ?? '',
-      applicationDate: DateTime.parse(map['applicationDate']),
+      applicationDate: map['applicationDate'] ?? Timestamp.now(),
       status: map['status'] ?? 'Pending',
     );
   }
@@ -52,7 +54,7 @@ class JobApplications {
     String? applicantName,
     String? resumeUrl,
     String? coverLetter,
-    DateTime? applicationDate,
+    Timestamp? applicationDate,
     String? status,
   }) {
     return JobApplications(

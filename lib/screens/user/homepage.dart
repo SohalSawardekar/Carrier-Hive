@@ -35,11 +35,11 @@ class _StudentDashboardState extends State<StudentDashboard>
   Widget build(BuildContext context) {
     final List<DashboardCard> _dashboardCards = [
       DashboardCard(
-        title: 'Academics',
-        icon: Icons.school,
+        title: 'Jobs',
+        icon: Icons.work,
         color: Colors.blue.shade400,
         onTap: (context, _) {
-          // Navigate to Academics page
+          Navigator.pushNamed(context, '/user/dashboard/Jobs');
         },
       ),
       DashboardCard(
