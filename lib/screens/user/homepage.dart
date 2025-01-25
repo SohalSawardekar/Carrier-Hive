@@ -14,7 +14,7 @@ class StudentDashboard extends StatefulWidget {
 class _StudentDashboardState extends State<StudentDashboard>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late String? currentStudentId; // Example ID
+  final String currentStudentId = '9LMIb4MVYySx16sRaW90';
 
   @override
   void initState() {
@@ -51,11 +51,11 @@ class _StudentDashboardState extends State<StudentDashboard>
         },
       ),
       DashboardCard(
-        title: 'Events',
-        icon: Icons.event,
+        title: 'applications',
+        icon: Icons.document_scanner,
         color: Colors.purple.shade400,
         onTap: (context, _) {
-          // Navigate to Events page
+          Navigator.pushNamed(context, '/user/dashboard/applications');
         },
       ),
       DashboardCard(
@@ -63,11 +63,12 @@ class _StudentDashboardState extends State<StudentDashboard>
         icon: Icons.account_circle,
         color: Colors.orange.shade400,
         onTap: (context, currentStudentId) {
+          print(currentStudentId);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ProfileManagementPage(
-                StudentId: currentStudentId ?? '',
+                StudentId: currentStudentId ?? '9LMIb4MVYySx16sRaW90',
               ),
             ),
           );

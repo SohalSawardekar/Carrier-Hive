@@ -18,6 +18,7 @@ class _ProfileManagementPageState extends State<ProfileManagementPage> {
   @override
   void initState() {
     super.initState();
+    print(widget.StudentId);
     _studentFuture = _fetchStudentDetail(widget.StudentId);
   }
 
