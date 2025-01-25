@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:carrier_hive/screens/profileMangement.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:carrier_hive/auth/login.dart';
 
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({super.key});
@@ -14,41 +14,7 @@ class StudentDashboard extends StatefulWidget {
 class _StudentDashboardState extends State<StudentDashboard>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late AnimationController controller1;
-  late AnimationController controller2;
-  final List<DashboardCard> _dashboardCards = [
-    DashboardCard(
-      title: 'Academics',
-      icon: Icons.school,
-      color: Colors.blue.shade400,
-      onTap: () {
-        // Navigate to Academics page
-      },
-    ),
-    DashboardCard(
-      title: 'Placements',
-      icon: Icons.work,
-      color: Colors.green.shade400,
-      onTap: () {
-        // Navigate to Placements page
-      },
-    ),
-    DashboardCard(
-      title: 'Events',
-      icon: Icons.event,
-      color: Colors.purple.shade400,
-      onTap: () {
-        // Navigate to Events page
-      },
-    ),
-  ];
-
-  void logOut() async {
-    final FirestoreAuthService authService = FirestoreAuthService();
-    await authService.logout();
-    Navigator.pushNamed(context, '/login');
-    print("Logged Out");
-  }
+  late String? currentStudentId; // Example ID
 
   @override
   void initState() {
@@ -57,22 +23,58 @@ class _StudentDashboardState extends State<StudentDashboard>
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
-    controller1 =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    controller2 =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    controller1.dispose();
-    controller2.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<DashboardCard> _dashboardCards = [
+      DashboardCard(
+        title: 'Academics',
+        icon: Icons.school,
+        color: Colors.blue.shade400,
+        onTap: (context, _) {
+          // Navigate to Academics page
+        },
+      ),
+      DashboardCard(
+        title: 'Placements',
+        icon: Icons.work,
+        color: Colors.green.shade400,
+        onTap: (context, _) {
+          // Navigate to Placements page
+        },
+      ),
+      DashboardCard(
+        title: 'Events',
+        icon: Icons.event,
+        color: Colors.purple.shade400,
+        onTap: (context, _) {
+          // Navigate to Events page
+        },
+      ),
+      DashboardCard(
+        title: 'Profile',
+        icon: Icons.account_circle,
+        color: Colors.orange.shade400,
+        onTap: (context, currentStudentId) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileManagementPage(
+                StudentId: currentStudentId ?? '',
+              ),
+            ),
+          );
+        },
+      ),
+    ];
+
     return Scaffold(
       body: Stack(
         children: [
@@ -195,14 +197,6 @@ class _StudentDashboardState extends State<StudentDashboard>
                     ),
                   ),
                 ),
-
-                ElevatedButton(
-                  onPressed: () => logOut(),
-                  child: Text(
-                    "LOG OUT",
-                    style: TextStyle(color: Colors.black,),
-                  ),
-                ),
               ],
             ),
           ),
@@ -239,7 +233,7 @@ class DashboardCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color color;
-  final VoidCallback onTap;
+  final void Function(BuildContext, String? currentStudentId) onTap;
 
   const DashboardCard({
     super.key,
@@ -252,7 +246,8 @@ class DashboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () =>
+          onTap(context, null), // Pass null if currentStudentId is not used
       child: GlassmorphicContainer(
         width: double.infinity,
         height: double.infinity,

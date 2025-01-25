@@ -1,18 +1,20 @@
 // ignore_for_file: non_constant_identifier_names, file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class StudentDetail {
   final String studentId;
   final String studentName;
   final String studentCollegeEmail;
   final String studentPersonalEmail;
   final int studentPhoneNumber;
-  final Gender studentGender;
+  final String studentGender;
   final String department;
-  final DateTime dateOfBirth;
+  final Timestamp dateOfBirth;
   final String rollNo;
   final String studentAddress;
   final String studentCollegeName;
-  final DateTime admission;
+  final Timestamp admission;
 
   StudentDetail({
     required this.studentId,
@@ -32,18 +34,17 @@ class StudentDetail {
   factory StudentDetail.fromMap(Map<String, dynamic> map, String documentId) {
     return StudentDetail(
       studentId: documentId,
-      studentName: map['studentName'] as String,
-      studentCollegeEmail: map['studentCollegeEmail'] as String,
-      studentPersonalEmail: map['studentPersonalEmail'] as String,
-      studentPhoneNumber: map['studentPhoneNumber'] as int,
-      studentGender: Gender.values.firstWhere(
-          (e) => e.toString() == 'Gender.${map['studentGender'] as String}'),
-      department: map['department'] as String,
-      dateOfBirth: DateTime.parse(map['dateOfBirth'] as String),
-      rollNo: map['rollNo'] as String,
-      studentAddress: map['studentAddress'] as String,
-      studentCollegeName: map['studentCollegeName'] as String,
-      admission: DateTime.parse(map['admission'] as String),
+      studentName: map['studentName'] ?? '',
+      studentCollegeEmail: map['studentCollegeEmail'] ?? '',
+      studentPersonalEmail: map['studentPersonalEmail'] ?? '',
+      studentPhoneNumber: map['studentPhoneNumber'] ?? 0,
+      studentGender: map['studentGender'] ?? '',
+      department: map['department'] ?? '',
+      dateOfBirth: map['dateOfBirth'] ?? Timestamp.now(),
+      rollNo: map['rollNo'] ?? '',
+      studentAddress: map['studentAddress'] ?? '',
+      studentCollegeName: map['studentCollegeName'] ?? '',
+      admission: map['admission'] ?? Timestamp.now(),
     );
   }
 
@@ -54,20 +55,25 @@ class StudentDetail {
       'studentCollegeEmail': studentCollegeEmail,
       'studentPersonalEmail': studentPersonalEmail,
       'studentPhoneNumber': studentPhoneNumber,
-      'studentGender': studentGender.toString().split('.').last,
+      'studentGender': studentGender,
       'department': department,
-      'dateOfBirth': dateOfBirth.toIso8601String(),
+      'dateOfBirth': dateOfBirth,
       'rollNo': rollNo,
       'studentAddress': studentAddress,
       'studentCollegeName': studentCollegeName,
-      'admission': admission.toIso8601String(),
-      'age': (DateTime.now().year - dateOfBirth.year) -
-          ((DateTime.now().month < dateOfBirth.month ||
-                  (DateTime.now().month == dateOfBirth.month &&
-                      DateTime.now().day < dateOfBirth.day))
-              ? 1
-              : 0),
+      'admission': admission,
+      'age': _calculateAge(dateOfBirth.toDate()),
     };
+  }
+
+  static int _calculateAge(DateTime birthDate) {
+    final today = DateTime.now();
+    int age = today.year - birthDate.year;
+    if (today.month < birthDate.month ||
+        (today.month == birthDate.month && today.day < birthDate.day)) {
+      age--;
+    }
+    return age;
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:carrier_hive/screens/admin/homepage.dart';
+import 'package:carrier_hive/screens/profileMangement.dart';
 import 'package:carrier_hive/screens/recruiter/homepage.dart';
 import 'package:carrier_hive/screens/user/homepage.dart';
 import 'package:carrier_hive/widgets/auth/login.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const Login(),
         '/admin/dashboard': (context) => const adminDashboard(),
         '/user/dashboard': (context) => const StudentDashboard(),
-        '/recruiter/dashboard': (context) => const recruiterDashboard()
+        '/recruiter/dashboard': (context) => const recruiterDashboard(),
       },
     );
   }
