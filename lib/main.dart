@@ -1,3 +1,4 @@
+import 'package:carrier_hive/widgets/auth/login.dart';
 import 'package:carrier_hive/widgets/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,9 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Carrier Hive',
-        home: Wrapper());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Carrier Hive',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Wrapper(),
+        '/login': (context) => const Login(),
+      },
+    );
   }
 }
