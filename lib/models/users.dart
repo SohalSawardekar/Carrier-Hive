@@ -2,13 +2,14 @@ class Users {
   final String id;
   final String name;
   final String email;
+  final String password;
   final String role;
-  final bool isLoggedIn = false;
 
   Users({
     required this.id,
     required this.name,
     required this.email,
+    required this.password,
     required this.role,
   });
 
@@ -17,6 +18,7 @@ class Users {
       id: documentId,
       name: map['name'] as String,
       email: map['email'],
+      password: map['password'],
       role: map['role'],
     );
   }
@@ -26,6 +28,7 @@ class Users {
       'id': id,
       'name': name,
       'email': email,
+      'password': password,
       'role': role,
     });
   }

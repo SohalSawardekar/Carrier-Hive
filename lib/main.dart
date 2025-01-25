@@ -1,3 +1,6 @@
+import 'package:carrier_hive/screens/admin/homepage.dart';
+import 'package:carrier_hive/screens/recruiter/homepage.dart';
+import 'package:carrier_hive/screens/user/homepage.dart';
 import 'package:carrier_hive/widgets/auth/login.dart';
 import 'package:carrier_hive/widgets/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Wrapper(),
         '/login': (context) => const Login(),
+        '/admin/dashboard': (context) => const adminDashboard(),
+        '/user/dashboard': (context) => const StudentDashboard(),
+        '/recruiter/dashboard': (context) => const recruiterDashboard()
       },
     );
   }
